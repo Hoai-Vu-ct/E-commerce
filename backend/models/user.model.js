@@ -15,8 +15,13 @@ const userSchema = new mongoose.Schema({
    },
    password: {
        type: String,
-       required: [true, "Password is required"],
+       //required: [true, "Password is required"],      Not required since google log ins do not use passwords by default
        minlength: [6, "Password must be at least 6 characters"]
+   },
+   googleId: {
+        type: String,       // for Google log in users
+        unique: true,       // 1:1 link with google account
+        sparse: true        // allows multiple users to have no googleId 
    },
    cartItems: [{
     quantity:{

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { User, Mail, Lock, Loader, UserPlus, ArrowRight  } from 'lucide-react';
 import { userStore }  from '../stores/useUserStore.js';
+import GoogleAuthButton from './GoogleAuthButton.jsx';
 
 
 const SignupPage = () => {
@@ -147,6 +148,7 @@ const SignupPage = () => {
 
 
           </form>
+          <GoogleAuthButton text="Đăng nhập với Google" />      
           <p className='mt-8 text-center text-sm text-gray-400'>
 						Bạn đã có tài khoản?{" "}
 						<Link to='/login' className='font-medium text-yellow-600 hover:text-yellow-700'>
