@@ -158,32 +158,9 @@ export const googleLogin = async (req, res) => {
     await storeRefreshToken(user._id, refreshToken);
     setCookies(res, accessToken, refreshToken);
 
-    
-
 	res.redirect('http://localhost:5173');
   } catch (error) {
     console.log("Error in Google Login", error.message);
     res.status(500).json({ message: "Server error", error: error.message });
-  }
-};
-
-export const googleCallback = async (req, res) => {
-  try {
-    // You would already have the user after the OAuth flow.
-    const user = req.user;  // passport attaches the user to req.user
-
-    // Create JWT tokens (adjust payload as necessary)
-    const accessToken = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
-    const refreshToken = jwt.sign({ userId: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
-
-    // Set tokens in cookies
-    res.cookie('accessToken', accessToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-    res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-
-    // Redirect to the frontend after login is complete
-    //res.redirect('http://localhost:3000/dashboard'); // Change to your desired route
-  } catch (error) {
-    console.error('Error during Google login:', error);
-    res.status(500).json({ message: 'Something went wrong' });
   }
 };

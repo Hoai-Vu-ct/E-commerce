@@ -20,7 +20,7 @@ router.get(
     session: false, 
     failureRedirect: "/login", 
   }),
-  googleLogin // You can remove this if we simplify as explained below.
+  googleLogin 
 );
 
 export default router
